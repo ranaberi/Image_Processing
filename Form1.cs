@@ -73,6 +73,7 @@ namespace Image_Processing
         private void button8_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = pictureBox2.Image;
+            SRC_IMG = DEST_IMG;
         }
 
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
@@ -283,6 +284,43 @@ namespace Image_Processing
 
                 }
             pictureBox2.Image = DEST_IMG;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            for (int x = 0; x < pictureBox1.Image.Width; x++)
+                for (int y = 0; y < pictureBox1.Image.Height; y++)
+                {
+                    int x_ = pictureBox1.Image.Width - 1 - x;
+                    int y_ = pictureBox1.Image.Height - 1 - y;
+                    int pivotR = SRC_IMG.GetPixel(x, y).R;
+                    int pivotG = SRC_IMG.GetPixel(x, y).G;
+                    int pivotB = SRC_IMG.GetPixel(x, y).B;
+                    DEST_IMG.SetPixel(x_,y_,Color.FromArgb((int)pivotR, (int)pivotG, (int)pivotB));
+                }
+            pictureBox2.Image = DEST_IMG;        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            Bitmap Temp2_IMG = new Bitmap(SRC_IMG.Height, SRC_IMG.Width);
+            for (int x= 0; x < pictureBox1.Image.Width;x++)
+                for(int y=0; y< pictureBox1.Image.Height; y++)
+                {
+                    int x_ = y;
+                    int y_ = pictureBox1.Image.Width - 1 - x;
+                    int pivotR = SRC_IMG.GetPixel(x, y).R;
+                    int pivotG = SRC_IMG.GetPixel(x, y).G;
+                    int pivotB = SRC_IMG.GetPixel(x, y).B;
+                    Temp2_IMG.SetPixel(x_, y_,Color.FromArgb((int)pivotR, (int)pivotG, (int)pivotB));
+                }
+            pictureBox2.Image =Temp2_IMG;
+            DEST_IMG = Temp2_IMG;
+            Temp_IMG = Temp2_IMG;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button2_Click(object sender, EventArgs e)
