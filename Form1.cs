@@ -226,6 +226,7 @@ namespace Image_Processing
                     int PivotG = SRC_IMG.GetPixel(x, y).G;
                     int PivotB = SRC_IMG.GetPixel(x, y).B;
 
+                    //assign new image
 
                     Temp_IMG.SetPixel(x * 2, y * 2, Color.FromArgb(PivotR, PivotG, PivotB));
                     Temp_IMG.SetPixel(x * 2+1, y * 2, Color.FromArgb(PivotR, PivotG, PivotB));
@@ -233,37 +234,21 @@ namespace Image_Processing
                     Temp_IMG.SetPixel(x * 2+1, y * 2+1, Color.FromArgb(PivotR, PivotG, PivotB));
                 }
 
-            double[,] K = new double[3, 3];
-            K[0, 0] = 0.0275; K[0, 1] = 0.1102; K[0, 2] = 0.0275;
-            K[1, 0] = 0.1102; K[1, 1] = 0.4421; K[1, 2] = 0.1102;
-            K[2, 0] = 0.0275; K[2, 1] = 0.1102; K[2, 2] = 0.0275;
 
-            for (int x = 1; x < pictureBox1.Image.Width - 1; x++)
-                for (int y = 1; y < pictureBox1.Image.Height - 1; y++)
+            for (int x = 0; x < (pictureBox1.Width - 2) / 2; x++)
+                for (int y = 0; y < (pictureBox1.Image.Height - 2) / 2; y++)
                 {
-                    int ResR = 0;
-                    int ResG = 0;
-                    int ResB = 0;
-                    //Convolution
-                    for (int i = 0; i < 3; i++)
-                        for (int j = 0; j < 3; j++)
-                        {
-                            ResR += (int)(K[i, j] * SRC_IMG.GetPixel(x + i - 1, y + j - 1).R);
-                            ResG += (int)(K[i, j] * SRC_IMG.GetPixel(x + i - 1, y + j - 1).G);
-                            ResB += (int)(K[i, j] * SRC_IMG.GetPixel(x + i - 1, y + j - 1).B);
+                    int PivotR = (Temp_IMG.GetPixel(x, y).R + Temp_IMG.GetPixel(x + 1, y).R
+                        + Temp_IMG.GetPixel(x, y + 1).R + Temp_IMG.GetPixel(x + 1, y).R) / 4;
+                    int PivotG = (Temp_IMG.GetPixel(x, y).G + Temp_IMG.GetPixel(x + 1, y).G
+                        + Temp_IMG.GetPixel(x, y + 1).G + Temp_IMG.GetPixel(x + 1, y).G) / 4;
+                    int PivotB = (Temp_IMG.GetPixel(x, y).B + Temp_IMG.GetPixel(x + 1, y).B
+                        + Temp_IMG.GetPixel(x, y + 1).B + Temp_IMG.GetPixel(x + 1, y).B) / 4;
 
-                        }
-
-                    //Assign to new image
-
-                    if (ResR > 255) ResR = 255; else if (ResR < 0) ResR = 0;
-                    if (ResG > 255) ResG = 255; else if (ResG < 0) ResG = 0;
-                    if (ResB > 255) ResB = 255; else if (ResB < 0) ResB = 0;
-
-
-                    DEST_IMG.SetPixel(x, y, Color.FromArgb(ResR, ResG, ResB));
-
+                    DEST_IMG.SetPixel(x, y, Color.FromArgb(PivotR, PivotG, PivotB));
                 }
+
+            pictureBox2.Image = DEST_IMG;
 
 
         }
