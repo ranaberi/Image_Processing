@@ -253,6 +253,38 @@ namespace Image_Processing
 
         }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            for (int x = 0; x < pictureBox1.Image.Width; x++)
+                for(int y = 0; y < pictureBox1.Image.Height; y++)
+                {
+                    int x_ = x;
+                    int y_ = pictureBox1.Image.Height-1- y;
+                    int PivotR = SRC_IMG.GetPixel(x, y).R;
+                    int PivotG = SRC_IMG.GetPixel(x, y).G;
+                    int PivotB = SRC_IMG.GetPixel(x, y).B;
+                    DEST_IMG.SetPixel(x_,y_,Color.FromArgb((int)PivotR,(int)PivotG, (int)PivotB));
+
+                }
+            pictureBox2.Image = DEST_IMG;
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            for (int x = 0; x < pictureBox1.Image.Width; x++)
+                for (int y = 0; y < pictureBox1.Image.Height; y++)
+                {
+                    int y_ = y;
+                    int x_ = pictureBox1.Image.Width - 1 - x;
+                    int PivotR = SRC_IMG.GetPixel(x, y).R;
+                    int PivotG = SRC_IMG.GetPixel(x, y).G;
+                    int PivotB = SRC_IMG.GetPixel(x, y).B;
+                    DEST_IMG.SetPixel(x_, y_, Color.FromArgb((int)PivotR, (int)PivotG, (int)PivotB));
+
+                }
+            pictureBox2.Image = DEST_IMG;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             double[,] K = new double[3, 3];
