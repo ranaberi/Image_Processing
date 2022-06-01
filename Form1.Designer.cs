@@ -58,6 +58,7 @@
             this.hScrollBar2 = new System.Windows.Forms.HScrollBar();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button20 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -270,6 +271,7 @@
             this.button17.TabIndex = 20;
             this.button17.Text = "Rot. Ar.";
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // textBox1
             // 
@@ -354,11 +356,19 @@
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click_1);
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(640, 466);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(75, 23);
+            this.textBox4.TabIndex = 34;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 547);
+            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.button20);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.hScrollBar2);
@@ -431,5 +441,6 @@
         private HScrollBar hScrollBar2;
         private TextBox textBox2;
         private Button button20;
+        private TextBox textBox4;
     }
 }

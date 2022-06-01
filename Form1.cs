@@ -341,6 +341,34 @@ namespace Image_Processing
             Temp_IMG = Temp2_IMG;
         }
 
+        private void button17_Click(object sender, EventArgs e)
+        {
+            double TH;
+            double.TryParse(textBox4.Text, out TH);
+            TH = TH / 180.0 * Math.PI;
+            int x0 = pictureBox1.Image.Width / 2;
+            int y0 = pictureBox1.Image.Height / 2;
+            for (int x = 0; x < pictureBox1.Image.Width; x++)
+                for (int y = 0; y < pictureBox1.Image.Height; y++)
+                {
+                    int x_ = (int)Math.Round(Math.Cos(TH) * (x - x0) + Math.Sin(TH) * (y - y0));
+                    int y_ = (int)Math.Round(-Math.Sin(TH) * (x - x0) + Math.Cos(TH) * (y - y0));
+                    x_ = y0 + x_;
+                    y_ = y0 + y_;
+
+                    if (x_ < 0) x_ = 0;
+                    if (y_ < 0) y_ = 0;
+                    if (x_ > DEST_IMG.Width - 1) x_ = DEST_IMG.Width - 1;
+                    if (y_ > DEST_IMG.Height - 1) y_ = DEST_IMG.Height - 1;
+
+                    int PivotR = SRC_IMG.GetPixel(x, y).R;
+                    int PivotG = SRC_IMG.GetPixel(x, y).G;
+                    int PivotB = SRC_IMG.GetPixel(x, y).B;
+                    if ((x_ >= 0) && (x_ < DEST_IMG.Width) &&(y_>=0)&& (y_ < DEST_IMG.Height))
+                        DEST_IMG.SetPixel(x_, y_, Color.FromArgb((int)PivotR, (int)PivotG, (int)PivotB));
+                }
+            pictureBox2.Image = DEST_IMG;
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             double[,] K = new double[3, 3];
